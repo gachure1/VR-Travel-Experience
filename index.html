@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script src="https://unpkg.com/unlazy@0.11.3/dist/unlazy.with-hashing.iife.js" defer init></script>
+  <script type="text/javascript">
+    window.tailwind.config = {
+      darkMode: ['class'],
+      theme: {
+        extend: {
+          colors: {
+            border: 'hsl(var(--border))',
+            input: 'hsl(var(--input))',
+            ring: 'hsl(var(--ring))',
+            background: 'hsl(var(--background))',
+            foreground: 'hsl(var(--foreground))',
+            primary: {
+              DEFAULT: 'hsl(var(--primary))',
+              foreground: 'hsl(var(--primary-foreground))'
+            },
+            secondary: {
+              DEFAULT: 'hsl(var(--secondary))',
+              foreground: 'hsl(var(--secondary-foreground))'
+            },
+            destructive: {
+              DEFAULT: 'hsl(var(--destructive))',
+              foreground: 'hsl(var(--destructive-foreground))'
+            },
+            muted: {
+              DEFAULT: 'hsl(var(--muted))',
+              foreground: 'hsl(var(--muted-foreground))'
+            },
+            accent: {
+              DEFAULT: 'hsl(var(--accent))',
+              foreground: 'hsl(var(--accent-foreground))'
+            },
+            popover: {
+              DEFAULT: 'hsl(var(--popover))',
+              foreground: 'hsl(var(--popover-foreground))'
+            },
+            card: {
+              DEFAULT: 'hsl(var(--card))',
+              foreground: 'hsl(var(--card-foreground))'
+            },
+          },
+        }
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer base {
+      :root {
+        --background: 0 0% 100%;
+        --foreground: 240 10% 3.9%;
+        --card: 0 0% 100%;
+        --card-foreground: 240 10% 3.9%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 240 10% 3.9%;
+        --primary: 240 5.9% 10%;
+        --primary-foreground: 0 0% 98%;
+        --secondary: 240 4.8% 95.9%;
+        --secondary-foreground: 240 5.9% 10%;
+        --muted: 240 4.8% 95.9%;
+        --muted-foreground: 240 3.8% 46.1%;
+        --accent: 240 4.8% 95.9%;
+        --accent-foreground: 240 5.9% 10%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 240 5.9% 90%;
+        --input: 240 5.9% 90%;
+        --ring: 240 5.9% 10%;
+        --radius: 0.5rem;
+      }
+      .dark {
+        --background: 240 10% 3.9%;
+        --foreground: 0 0% 98%;
+        --card: 240 10% 3.9%;
+        --card-foreground: 0 0% 98%;
+        --popover: 240 10% 3.9%;
+        --popover-foreground: 0 0% 98%;
+        --primary: 0 0% 98%;
+        --primary-foreground: 240 5.9% 10%;
+        --secondary: 240 3.7% 15.9%;
+        --secondary-foreground: 0 0% 98%;
+        --muted: 240 3.7% 15.9%;
+        --muted-foreground: 240 5% 64.9%;
+        --accent: 240 3.7% 15.9%;
+        --accent-foreground: 0 0% 98%;
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 240 3.7% 15.9%;
+        --input: 240 3.7% 15.9%;
+        --ring: 240 4.9% 83.9%;
+      }
+    }
+    .video-background {
+      position: fixed; /* Keeps the video fixed in place */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1; /* Ensures video stays behind other content */
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden; /* Prevent horizontal scroll */
+      height: 100vh; /* Ensures body height is full viewport height */
+    }
+    main {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* Full viewport height */
+      z-index: 1; /* Keeps main content above the video */
+    }
+  </style>
+</head>
+<body>
+  <video class="video-background" autoplay muted loop>
+    <source src="WhatsApp Video 2024-07-29 at 12.43.10 PM.mp4" type="video/mp4"> <!-- Replace with your video file path -->
+    Your browser does not support the video tag.
+  </video>
+  <header class="p-4 flex justify-between items-center bg-transparent">
+    <div class="text-3xl font-bold text-primary">VrTrek</div>
+    <nav class="hidden md:flex space-x-6">
+      <a href="index.html" class="text-muted hover:text-muted-foreground">HOME</a>
+      <a href="destinations.html" class="text-muted hover:text-muted-foreground">DESTINATIONS</a>
+      <a href="#" class="text-muted hover:text-muted-foreground">VIRTUAL TOURS</a>
+      <a href="#" class="text-muted hover:text-muted-foreground">TRAVEL PACKAGES</a>
+      <a href="#" class="text-muted hover:text-muted-foreground">USER REVIEWS</a>
+      <a href="#" class="text-muted hover:text-muted-foreground">Contact</a>
+    </nav>
+    <a href="#" class="bg-secondary text-secondary-foreground py-2 px-4 rounded hover:bg-secondary/80">Sign in</a>
+    <button class="md:hidden text-muted focus:outline-none" aria-label="Toggle navigation">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+      </svg>
+    </button>
+  </header>
+  <main class="flex flex-col items-center justify-center text-center bg-black bg-opacity-50 text-foreground p-4">
+    <div class="relative p-8 bg-zinc-00 rounded-lg shadow-lg">
+      <div class="relative z-10">
+        <h1 class="text-4xl font-bold text-purple-600">The World OF <span class="text-accent">METAVERSE</span></h1>
+        <p class="mt-4 text-lg text-muted-foreground">Get to experience the world at the expense of your home and get to enjoy the world tourist destinations</p>
+        <div class="mt-6">
+          <span class="text-2xl font-semibold">50M+<br>Experiencing it</span>
+        </div>
+        <a href="virtual tours.html" button class="mt-4 bg-primary text-primary-foreground py-2 px-6 rounded-full hover:bg-primary/80">BOOK A TOUR</button></a>
+      </div>
+      <div class="absolute bottom-4 right-4">
+        <button class="bg-zinc-600 rounded-full p-2 hover:bg-zinc-500">
+          <img aria-hidden="true" alt="play-button" src="https://openui.fly.dev/openui/24x24.svg?text=▶️" />
+        </button>
+      </div>
+    </div>
+  </main>
+  <footer class="text-foreground p-4 bg-transparent">
+    <div class="container mx-auto flex justify-between items-center">
+      <nav class="flex space-x-4">
+        <a href="destinations.html" class="text-muted hover:text-muted-foreground">DESTINATIONS</a>
+        <a href="#" class="text-muted hover:text-muted-foreground">VIRTUAL TOURS</a>
+        <a href="#" class="text-muted hover:text-muted-foreground">TRAVEL PACKAGES</a>
+        <a href="#" class="text-muted hover:text-muted-foreground">USER REVIEWS</a>
+        <a href="#" class="text-muted hover:text-muted-foreground">Contact</a>
+      </nav>
+      <div class="flex space-x-2">
+        <button class="bg-secondary text-secondary-foreground hover:bg-secondary/80 px-4 py-2 rounded">Sign in</button>
+        <button class="bg-primary text-primary-foreground hover:bg-primary/80 px-4 py-2 rounded">Register</button>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

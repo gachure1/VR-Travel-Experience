@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script src="https://unpkg.com/unlazy@0.11.3/dist/unlazy.with-hashing.iife.js" defer init></script>
+  <script type="text/javascript">
+    window.tailwind.config = {
+      darkMode: ['class'],
+      theme: {
+        extend: {
+          colors: {
+            border: 'hsl(var(--border))',
+            input: 'hsl(var(--input))',
+            ring: 'hsl(var(--ring))',
+            background: 'hsl(var(--background))',
+            foreground: 'hsl(var(--foreground))',
+            primary: {
+              DEFAULT: 'hsl(var(--primary))',
+              foreground: 'hsl(var(--primary-foreground))'
+            },
+            secondary: {
+              DEFAULT: 'hsl(var(--secondary))',
+              foreground: 'hsl(var(--secondary-foreground))'
+            },
+            destructive: {
+              DEFAULT: 'hsl(var(--destructive))',
+              foreground: 'hsl(var(--destructive-foreground))'
+            },
+            muted: {
+              DEFAULT: 'hsl(var(--muted))',
+              foreground: 'hsl(var(--muted-foreground))'
+            },
+            accent: {
+              DEFAULT: 'hsl(var(--accent))',
+              foreground: 'hsl(var(--accent-foreground))'
+            },
+            popover: {
+              DEFAULT: 'hsl(var(--popover))',
+              foreground: 'hsl(var(--popover-foreground))'
+            },
+            card: {
+              DEFAULT: 'hsl(var(--card))',
+              foreground: 'hsl(var(--card-foreground))'
+            },
+          },
+        }
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer base {
+      :root {
+        --background: #654563;
+        --foreground: 240 10% 3.9%;
+        --card: 0 0% 100%;
+        --card-foreground: 240 10% 3.9%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 240 10% 3.9%;
+        --primary: 240 5.9% 10%;
+        --primary-foreground: 0 0% 98%;
+        --secondary: 240 4.8% 95.9%;
+        --secondary-foreground: 240 5.9% 10%;
+        --muted: 240 4.8% 95.9%;
+        --muted-foreground: 240 3.8% 46.1%;
+        --accent: 240 4.8% 95.9%;
+        --accent-foreground: 240 5.9% 10%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 240 5.9% 90%;
+        --input: 240 5.9% 90%;
+        --ring: 240 5.9% 10%;
+        --radius: 0.5rem;
+      }
+      .dark {
+        --background: 240 10% 3.9%;
+        --foreground: 0 0% 98%;
+        --card: 240 10% 3.9%;
+        --card-foreground: 0 0% 98%;
+        --popover: 240 10% 3.9%;
+        --popover-foreground: 0 0% 98%;
+        --primary: 0 0% 98%;
+        --primary-foreground: 240 5.9% 10%;
+        --secondary: 240 3.7% 15.9%;
+        --secondary-foreground: 0 0% 98%;
+        --muted: 240 3.7% 15.9%;
+        --muted-foreground: 240 5% 64.9%;
+        --accent: 240 3.7% 15.9%;
+        --accent-foreground: 0 0% 98%;
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 240 3.7% 15.9%;
+        --input: 240 3.7% 15.9%;
+        --ring: 240 4.9% 83.9%;
+      }
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden; /* Prevent horizontal scroll */
+      min-height: 100vh; /* Ensure body covers full viewport height */
+    }
+    .video-background {
+      position: fixed; /* Keeps the video fixed in place */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1; /* Ensures video stays behind other content */
+    }
+    main {
+      position: relative;
+      z-index: 1; /* Keeps main content above the video */
+      padding: 1rem; /* Adjust padding as needed */
+      background-color: transparent; /* Make background transparent */
+      min-height: calc(100vh - 80px); /* Ensure main section fills viewport minus header/footer */
+    }
+    .image-container {
+      position: relative;
+      width: 100%;
+      height: 200px; /* Adjust height as needed */
+      overflow: hidden;
+      border-radius: var(--radius); /* Optional: rounded corners */
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .image-container:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border: none; /* Remove any border */
+      transition: opacity 0.3s ease;
+    }
+    .image-container:hover img {
+      opacity: 0.8; /* Slightly dim the image on hover */
+    }
+    .overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.5); /* Dark overlay for better text readability */
+      color: white;
+      padding: 0.5rem;
+      text-align: center;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+    }
+    .image-container:hover .overlay {
+      background: rgba(0, 0, 0, 0.7); /* Darker overlay on hover */
+    }
+    .overlay a {
+      color: #a0aec0; /* Lighter color for the play button */
+      text-decoration: none;
+      font-size: 1.25rem;
+      display: inline-block;
+      margin-top: 0.5rem;
+      transition: color 0.3s ease;
+    }
+    .overlay a:hover {
+      color: #e2e8f0; /* Lighter color on hover */
+    }
+    .review-container {
+      background-color: #f9f9f9; /* Light gray background for review containers */
+    }
+  </style>
+  <script>
+    function toggleNav() {
+      const nav = document.getElementById('mobile-nav');
+      nav.classList.toggle('hidden');
+    }
+  </script>
+</head>
+<body>
+  <video class="video-background" autoplay muted loop>
+    <source src="WhatsApp Video 2024-07-29 at 2.31.13 PM.mp4" type="video/mp4"> <!-- Replace with your video file path -->
+    Your browser does not support the video tag.
+  </video>
+  <header class="bg-transparent p-4 flex justify-between items-center fixed top-0 left-0 w-full z-10">
+    <div class="text-3xl font-bold text-primary">V</div>
+    <nav class="hidden md:flex space-x-6">
+      <a href="index.html" class="text-muted hover:text-muted-foreground">HOME</a>
+      <a href="destinations.html" class="text-muted hover:text-muted-foreground">DESTINATIONS</a>
+      <a href="virtual-tours.html" class="text-muted hover:text-muted-foreground">VIRTUAL TOURS</a>
+      <a href="travel-packages.html" class="text-muted hover:text-muted-foreground">TRAVEL PACKAGES</a>
+      <a href="user-reviews.html" class="text-muted hover:text-muted-foreground">USER REVIEWS</a>
+      <a href="contact.html" class="text-muted hover:text-muted-foreground">CONTACT</a>
+    </nav>
+    <a href="sign-in.html" class="bg-secondary text-secondary-foreground py-2 px-4 rounded hover:bg-secondary/80">Sign in</a>
+    <button class="md:hidden text-muted focus:outline-none" aria-label="Open navigation" onclick="toggleNav()">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+  </header>
+  <nav id="mobile-nav" class="md:hidden fixed top-0 left-0 w-full h-full bg-white shadow-lg hidden">
+    <div class="p-4">
+      <button class="text-muted focus:outline-none" aria-label="Close navigation" onclick="toggleNav()">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+      <nav class="mt-4">
+        <a href="index.html" class="block py-2 text-muted hover:text-muted-foreground">HOME</a>
+        <a href="destinations.html" class="block py-2 text-muted hover:text-muted-foreground">DESTINATIONS</a>
+        <a href="virtual-tours.html" class="block py-2 text-muted hover:text-muted-foreground">VIRTUAL TOURS</a>
+        <a href="travel-packages.html" class="block py-2 text-muted hover:text-muted-foreground">TRAVEL PACKAGES</a>
+        <a href="user-reviews.html" class="block py-2 text-muted hover:text-muted-foreground">USER REVIEWS</a>
+        <a href="contact.html" class="block py-2 text-muted hover:text-muted-foreground">CONTACT</a>
+        <a href="sign-in.html" class="bg-secondary text-secondary-foreground py-2 px-4 rounded hover:bg-secondary/80 block mt-4">Sign in</a>
+      </nav>
+    </div>
+  </nav>
+  <main class="flex flex-col items-center justify-center text-center relative z-10">
+    <div class="container mx-auto p-6">
+      <h2 class="text-2xl font-bold text-primary mb-2">USER REVIEWS</h2>
+      <p class="text-muted-foreground mb-6">Hear from our satisfied travelers</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="review-container p-4 rounded shadow">
+          <p class="text-lg font-semibold mb-2">John Doe</p>
+          <p class="text-muted-foreground mb-2">"Amazing experience! The virtual tours were incredible and made planning my trip so much easier."</p>
+          <p class="text-sm ">Rating: ★★★★★</p>
+        </div>
+        <div class="review-container p-4 rounded shadow">
+          <p class="text-lg font-semibold mb-2">Jane Smith</p>
+          <p class="text-muted-foreground mb-2">"The travel packages are very well organized and the customer service was excellent."</p>
+          <p class="text-sm ">Rating: ★★★★☆</p>
+        </div>
+        <div class="review-container p-4 rounded shadow">
+          <p class="text-lg font-semibold mb-2">Alex Johnson</p>
+          <p class="text-muted-foreground mb-2">"I loved the detailed information about each destination. Highly recommend this service!"</p>
+          <p class="text-sm ">Rating: ★★★★★</p>
+        </div>
+        <div class="review-container p-4 rounded shadow">
+          <p class="text-lg font-semibold mb-2">Emily Davis</p>
+          <p class="text-muted-foreground mb-2">"Booking my trip was a breeze with their easy-to-use platform. Will definitely use again."</p>
+          <p class="text-sm ">Rating: ★★★★☆</p>
+        </div>
+        <div class="review-container p-4 rounded shadow">
+          <p class="text-lg font-semibold mb-2">Michael Brown</p>
+          <p class="text-muted-foreground mb-2">"A truly memorable trip, thanks to the excellent organization and support from the team."</p>
+          <p class="text-sm ">Rating: ★★★★★</p>
+        </div>
+        <div class="review-container p-4 rounded shadow">
+          <p class="text-lg font-semibold mb-2">Sarah Wilson</p>
+          <p class="text-muted-foreground mb-2">"Highly satisfied with the virtual tours. They gave me a clear idea of what to expect."</p>
+          <p class="text-sm ">Rating: ★★★★★</p>
+        </div>
+        <div class="review-container p-4 rounded shadow">
+          <p class="text-lg font-semibold mb-2">David Martinez</p>
+          <p class="text-muted-foreground mb-2">"The travel packages are worth every penny. Great value for money!"</p>
+          <p class="text-sm ">Rating: ★★★★★</p>
+        </div>
+        <div class="review-container p-4 rounded shadow">
+          <p class="text-lg font-semibold mb-2">Laura Garcia</p>
+          <p class="text-muted-foreground mb-2">"Friendly staff and excellent customer service. Made my trip planning hassle-free."</p>
+          <p class="text-sm ">Rating: ★★★★☆</p>
+        </div>
+        <div class="review-container p-4 rounded shadow">
+          <p class="text-lg font-semibold mb-2">Robert Hernandez</p>
+          <p class="text-muted-foreground mb-2">"The best travel agency I have ever used. Highly recommended!"</p>
+          <p class="text-sm ">Rating: ★★★★★</p>
+        </div>
+        <div class="review-container p-4 rounded shadow">
+          <p class="text-lg font-semibold mb-2">Jessica Lee</p>
+          <p class="text-muted-foreground mb-2">"Great variety of destinations and well-organized tours."</p>
+          <p class="text-sm ">Rating: ★★★★☆</p>
+        </div>
+        <div class="review-container p-4 rounded shadow">
+          <p class="text-lg font-semibold mb-2">Daniel Walker</p>
+          <p class="text-muted-foreground mb-2">"The virtual tours helped me choose the perfect destination. Thank you!"</p>
+          <p class="text-sm ">Rating: ★★★★★</p>
+        </div>
+        <div class="review-container p-4 rounded shadow">
+          <p class="text-lg font-semibold mb-2">Sophia Gonzalez</p>
+          <p class="text-muted-foreground mb-2">"Exceptional service and attention to detail. Highly recommended!"</p>
+          <p class="text-sm ">Rating: ★★★★★</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+  <footer class="bg-transparent p-4 mt-6">
+    <div class="container mx-auto flex justify-between items-center">
+      <nav class="flex space-x-6">
+        <a href="index.html" class="text-muted hover:text-muted-foreground">HOME</a>
+        <a href="destinations.html" class="text-muted hover:text-muted-foreground">DESTINATIONS</a>
+        <a href="virtual-tours.html" class="text-muted hover:text-muted-foreground">VIRTUAL TOURS</a>
+        <a href="travel-packages.html" class="text-muted hover:text-muted-foreground">TRAVEL PACKAGES</a>
+        <a href="user-reviews.html" class="text-muted hover:text-muted-foreground">USER REVIEWS</a>
+        <a href="contact.html" class="text-muted hover:text-muted-foreground">CONTACT</a>
+      </nav>
+      <div class="flex space-x-2">
+        <button class="bg-secondary text-secondary-foreground hover:bg-secondary/80 px-4 py-2 rounded">Sign in</button>
+        <button class="bg-primary text-primary-foreground hover:bg-primary/80 px-4 py-2 rounded">Register</button>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
